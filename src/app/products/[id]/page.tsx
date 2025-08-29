@@ -28,14 +28,18 @@
 import { fetchProduct } from "@/lib/api";
 import AddToCartButton from "./AddToCartButton";
 import Image from "next/image";
-import { Metadata } from "next";
 
-interface PageProps {
-  params: { id: string };
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
 }
 
-export default async function ProductDetailPage({ params }: PageProps) {
-  const product = await fetchProduct(params.id);
+// Next.js automatically passes params to page components
+export default async function ProductDetailPage({ params }: { params: { id: string } }) {
+  const product: Product = await fetchProduct(params.id);
 
   return (
     <div className="grid md:grid-cols-2 gap-12">
