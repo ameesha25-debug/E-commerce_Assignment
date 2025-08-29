@@ -37,8 +37,7 @@ interface Product {
   image: string;
 }
 
-// Next.js automatically passes params to page components
-export default async function ProductDetailPage({ params }: { params: { id: string } }) {
+export default async function ProductDetailPage({ params }: any) {
   const product: Product = await fetchProduct(params.id);
 
   return (
