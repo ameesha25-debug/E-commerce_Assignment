@@ -8,9 +8,7 @@ type Product = {
   // add more fields if needed
 };
 
-type CartItem = Product & {
-  quantity: number;
-};
+
 
 
 export default function AddToCartButton({ product }: { product: Product }) {

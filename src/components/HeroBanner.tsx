@@ -20,14 +20,13 @@ export default function HeroBanner() {
   return (
     <section className="relative w-full h-96 mb-8 rounded-2xl overflow-hidden">
       {heroImages.map((src, index) => (
-        <img
-          key={index}
-          src={src}
-          alt={`Hero ${index + 1}`}
-          className={`absolute w-full h-96 object-cover transition-opacity duration-1000 ${
-            index === currentIndex ? "opacity-100" : "opacity-0"
-          }`}
-        />
+        <Image
+            src={src}
+            alt={`Hero ${index + 1}`}
+            fill
+            style={{ objectFit: "cover" }}
+            priority={index === 0} // first image loads faster
+          />
       ))}
 
       <div className="absolute inset-0 flex flex-col justify-center items-center text-white bg-black/30">
