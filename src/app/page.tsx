@@ -8,9 +8,22 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import HeroBanner from "@/components/HeroBanner";
+import Image from "next/image";
+
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+};
+
 
 export default function Home() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     async function loadProducts() {
@@ -20,10 +33,9 @@ export default function Home() {
     loadProducts();
   }, []);
   <div>
-  <HeroBanner />
-  {/* Product carousels here */}
-</div>
-
+    <HeroBanner />
+    {/* Product carousels here */}
+  </div>;
 
   const categories = [
     { title: "Today's Deal", products: products.slice(0, 6) },
@@ -35,10 +47,13 @@ export default function Home() {
     <div>
       {/* Hero Image Section */}
       <section className="mb-8">
-        <img
-          src="/images/hero1.jpg" 
+        <Image
+          src="/images/hero1.jpg"
           alt="Hero Banner"
-          className="w-full h-96 object-cover rounded-2xl"
+          className="rounded-2xl object-cover"
+          width={1920} // Set a width for optimization
+          height={500} // Set a height for optimization
+          priority // Optional: preloads the image for LCP
         />
       </section>
 

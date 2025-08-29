@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function HeroBanner() {
-  const heroImages = [
-    "/images/hero2.jpg",
-    
-  ];
+  const heroImages = ["/images/hero2.jpg"];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -17,7 +15,7 @@ export default function HeroBanner() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages.length]);
 
   return (
     <section className="relative w-full h-96 mb-8 rounded-2xl overflow-hidden">
@@ -32,7 +30,6 @@ export default function HeroBanner() {
         />
       ))}
 
-      
       <div className="absolute inset-0 flex flex-col justify-center items-center text-white bg-black/30">
         <h1 className="text-5xl font-bold mb-4">Welcome to MyShop</h1>
         <p className="text-lg">Find the best products at unbeatable prices!</p>

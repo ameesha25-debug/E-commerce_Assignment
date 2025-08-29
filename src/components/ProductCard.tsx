@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useCartStore } from "@/store/useCartStore";
+import Image from "next/image";
 
 interface ProductCardProps {
   id: number;
@@ -9,7 +10,12 @@ interface ProductCardProps {
   image: string;
 }
 
-export default function ProductCard({ id, title, price, image }: ProductCardProps) {
+export default function ProductCard({
+  id,
+  title,
+  price,
+  image,
+}: ProductCardProps) {
   const addToCart = useCartStore((state) => state.addToCart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const items = useCartStore((state) => state.items);
@@ -19,7 +25,13 @@ export default function ProductCard({ id, title, price, image }: ProductCardProp
   return (
     <div className="border rounded-lg p-4 shadow hover:shadow-lg transition bg-white">
       <Link href={`/products/${id}`}>
-        <img src={image} alt={title} className="h-40 w-full object-contain mb-4" />
+        <Image
+          src={image}
+          alt={title}
+          width={300} // specify width
+          height={300} // specify height
+          className="object-contain mb-4"
+        />{" "}
         <h3 className="font-medium">{title}</h3>
       </Link>
       <div className="mt-2 flex justify-between items-center">
@@ -35,7 +47,9 @@ export default function ProductCard({ id, title, price, image }: ProductCardProp
             </button>
             <span className="px-2">{productInCart.quantity}</span>
             <button
-              onClick={() => addToCart({ id, title, price, image, quantity: 1 })}
+              onClick={() =>
+                addToCart({ id, title, price, image, quantity: 1 })
+              }
               className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
             >
               +
