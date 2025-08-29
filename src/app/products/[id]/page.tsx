@@ -28,14 +28,13 @@
 import { fetchProduct } from "@/lib/api";
 import AddToCartButton from "./AddToCartButton";
 import Image from "next/image";
+import { Metadata } from "next";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+interface PageProps {
+  params: { id: string };
+}
 
-export default async function ProductDetailPage({ params }: Props) {
+export default async function ProductDetailPage({ params }: PageProps) {
   const product = await fetchProduct(params.id);
 
   return (
