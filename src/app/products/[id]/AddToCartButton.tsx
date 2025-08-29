@@ -1,7 +1,19 @@
 "use client";
 import { useCartStore } from "@/store/useCartStore";
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  // add more fields if needed
+};
 
-export default function AddToCartButton({ product }: { product: any }) {
+type CartItem = Product & {
+  quantity: number;
+};
+
+
+export default function AddToCartButton({ product }: { product: Product }) {
   const { items, addToCart, removeFromCart } = useCartStore();
 
   const cartItem = items.find((i) => i.id === product.id);
@@ -17,21 +29,27 @@ export default function AddToCartButton({ product }: { product: any }) {
         </button>
         <span className="font-medium">{cartItem.quantity}</span>
         <button
-          onClick={() => addToCart(product)}
-          className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
-        >
-          +
-        </button>
+  onClick={() =>
+    addToCart({ ...product, quantity: 1 }) // increment by 1
+  }
+  className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
+>
+  +
+</button>
+
       </div>
     );
   }
 
   return (
     <button
-      onClick={() => addToCart(product)}
-      className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-    >
-      Add to Cart
-    </button>
+  onClick={() =>
+    addToCart({ ...product, quantity: 1 }) // ✅ add quantity here
+  }
+  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+>
+  Add to Cart
+</button>
+
   );
 }

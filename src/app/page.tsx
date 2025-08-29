@@ -10,9 +10,7 @@ import { Navigation } from "swiper/modules";
 import HeroBanner from "@/components/HeroBanner";
 import Image from "next/image";
 
-type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+
 
 type Product = {
   id: number;
